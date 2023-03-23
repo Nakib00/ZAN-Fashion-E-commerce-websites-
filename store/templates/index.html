@@ -1,0 +1,50 @@
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% comment %} body {% endcomment %}
+<div class="container-fluid mt-3">
+  <div class="row">
+
+    {% comment %} filter {% endcomment %}
+    <div class="col-lg-3 mx-auto">
+      <div class="list-group">
+{% comment %} show all product {% endcomment %}
+        <a href="/" class="list-group-item list-group-item-action text-center">All Product</a>
+        
+        {% comment %} Show setected product {% endcomment %}
+        {% for category in categorys  %}
+
+        <a href="/?category={{category.id}}" class="list-group-item list-group-item-action text-center">{{category.name}}</a>
+
+        {% endfor %}
+        
+      </div>
+    </div>
+
+
+    {% comment %} all product {% endcomment %}
+    <div id="product" class="col-lg-9 mx-auto">
+      <div class="row mx-auto">
+        {% for Product in products %}
+    
+        <div class="col">
+          <div class="card mx-auto mb-3" style="width: 18rem">
+            <img src="{{Product.image.url}}" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">{{Product.name}}</h5>
+              <p class="card-text"><b>{{Product.price}}</b></p>
+              <a href="#" class="btn btn-light border btn-sm">Add to cart</a>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock  %}
+    

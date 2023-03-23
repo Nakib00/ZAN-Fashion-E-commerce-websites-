@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="p-4 m-4">
+        <div class="col-lg-5 mx-auto border rounded p-4 m-4">
+            <h3 class="alert alert-light border rounded pt-4 text-center">Create a Account</h3>
+            
+            <form action="/singup" method="POST">
+                {% csrf_token %}
+
+
+                {% comment %} If there is any error than show that here  {% endcomment %}
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {% endif %}
+                
+
+                {% comment %} First name {% endcomment %}
+                <div class="form-group pt-4">
+                    <label for="">First Name</label>
+                    <input type="text" name="firstname" value="{{values.firstname}}" id="" class="form-control" placeholder="First Name">
+                  </div>
+                
+                {% comment %} Lest Name {% endcomment %}
+                <div class="form-group pt-4">
+                    <label for="">Last Mane</label>
+                    <input type="text" name="lastname" value="{{values.lastname}}" id="" class="form-control" placeholder="Last Name">
+                  </div>
+                
+                {% comment %} Phone {% endcomment %}
+                <div class="form-group pt-4">
+                    <label for="">Phone Number</label>
+                    <input type="text" name="phonenumber" value="{{values.phone}}" id="" class="form-control" placeholder="+088">
+                  </div>
+
+                {% comment %} email {% endcomment %}
+                <div class="form-group pt-4">
+                  <label for="">Email</label>
+                  <input type="email" name="email" value="{{values.email}}" id="" class="form-control" placeholder="exmpal@gmail.com">
+                </div>
+
+                {% comment %} password {% endcomment %}
+                <div class="form-group pt-4">
+                    <label for="">password</label>
+                    <input type="password" name="password" id="" class="form-control">
+                </div>
+                
+                {% comment %} Button {% endcomment %}
+                <div class="form-group pt-4">
+                    <input class="btn btn-success" type="submit" value="Create Account"></input>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
