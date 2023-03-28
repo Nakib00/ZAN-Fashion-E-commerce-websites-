@@ -109,5 +109,29 @@ def singup(request):
     if request.method == 'GET':
         return render(request, 'singup.html')
     else:
-        # Call the register_user function for registration new user when Mathod id post
+        # Call the register_user function for registration new user when Mathod is POST
         return register_user(request)
+
+
+# This function is responsible for login page
+def login(request):
+    if request.method == "GET":
+        return render(request, 'login.html')
+    else:
+        #  Mathod is POST
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        error_massage = None
+        # This function is check user email and get it from the database and store it in coustomers
+        coustomers = coustomer.get_coustomer_by_email(email)
+        # If email is exigst then check the password
+        if coustomers:
+            flag = check_password(password, coustomers.password)
+            if flag:
+                return redirect('homepage')
+            else:
+                error_massage = 'Email and Password invalid !!'
+        else:
+            error_massage = 'Email and Password invalid !!'
+        return render(request, 'login.html', {'error' : error_massage})
