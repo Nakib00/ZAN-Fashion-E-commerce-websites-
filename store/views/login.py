@@ -16,14 +16,19 @@ class Login(View):
     def post(self, request):
         email = request.POST.get('email')
         password = request.POST.get('password')
-
-        error_massage = None
         # This function is check user email and get it from the database and store it in coustomers
         coustomers = coustomer.get_coustomer_by_email(email)
+        
+        error_massage = None
         # If email is exigst then check the password
         if coustomers:
             flag = check_password(password, coustomers.password)
             if flag:
+                
+                # Take user data using the session and cookies
+                request.session['coustomer_id'] = coustomers.id
+                request.session['email'] = coustomers.email
+                
                 return redirect('homepage')
             else:
                 error_massage = 'Email and Password invalid !!'
